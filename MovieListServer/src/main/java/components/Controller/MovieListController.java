@@ -27,8 +27,4 @@ public class MovieListController implements MovieListAPI {
         return ms.getTopRevenueMoviesByYear(year);
     }
 
-    @Override
-    public Movie getMovie(long id) {
-        return null;
-    }
 }

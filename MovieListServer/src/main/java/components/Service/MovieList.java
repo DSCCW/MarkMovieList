@@ -23,7 +23,7 @@ public interface MovieList {
     List<Movie> getTopRevenueMoviesByYear(int year);
 
     /**
-     * This method returns the movie with the given id, for the purposes of showcasing its details in the front-end.
+     * This method returns the movie with the given id, for the purposes of testing
      * @param id - id for a movie.
      */
     Movie getMovie(long id);

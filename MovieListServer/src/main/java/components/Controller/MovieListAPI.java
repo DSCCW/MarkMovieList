@@ -19,6 +19,4 @@ public interface MovieListAPI {
     @GetMapping("/revenue/{year}")
     List<Movie> getTop10RevenueMoviesByYear(@PathVariable int year);
 
-    @GetMapping("/movie/{id}")
-    Movie getMovie(@PathVariable long id);
 }
