@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieListService implements MovieList {
@@ -27,11 +28,19 @@ public class MovieListService implements MovieList {
 
     @Override
     public List<Movie> getTopRevenueMovies() {
-        return null;
+        return movies.findTop10TopByRevenue();
     }
 
     @Override
     public List<Movie> getTopRevenueMoviesByYear(int year) {
+        return movies.findTop10ByRevenueByYear(year);
+    }
+
+    @Override
+    public Movie getMovie(long id) {
+        Optional<Movie> mov = movies.findById(id);
+        if (mov.isPresent())
+            return mov.get();
         return null;
     }
 }
