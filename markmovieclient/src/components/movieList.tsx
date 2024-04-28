@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
@@ -6,35 +6,14 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import IconButton from "@mui/material/IconButton";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { MovieDTO } from "../movielistapi";
+import { useMLSelector } from "../store/hooks";
 
-interface testMovie {
-    title: string,
-    year: number,
-    revenue: number
-}
 
-function createTestMovie(title: string, year: number, revenue: number) : testMovie {
-    return {title, year, revenue};
-}
 
-const movieList = () => {
 
-    const rows = [
-        createTestMovie('Star Wars', 2000, 1000000),
-        createTestMovie('Iron Man', 2008, 2000000),
-        createTestMovie('Dune', 2021, 3000000),
-        createTestMovie('Spider-Man', 2011, 7500000),
-        createTestMovie('Titanic', 1997, 219512712),
-      ];
-
-    
-    return (
-        <DefaultMovieList rows={rows}/>
-    )
-        
-}
-
-const DefaultMovieList = ({rows} : {rows: testMovie[]}) => {
+const DefaultMovieList = ({rows} : {rows: MovieDTO[]}) => {
     return (
             <TableContainer>
                 <Table>
@@ -52,8 +31,8 @@ const DefaultMovieList = ({rows} : {rows: testMovie[]}) => {
                             rows.map((row, index) => (
                                 <TableRow>
                                     <TableCell>{index}</TableCell>
-                                    <TableCell align="right">{row.title}</TableCell>
-                                    <TableCell align="right">{row.year}</TableCell>
+                                    <TableCell align="right">{row.movieTitle}</TableCell>
+                                    <TableCell align="right">{row.releaseYear}</TableCell>
                                     <TableCell align="right">{row.revenue}</TableCell>
                                     <TableCell align="right">
                                         <IconButton onClick={() => {/* TODO */}}></IconButton>
@@ -65,6 +44,36 @@ const DefaultMovieList = ({rows} : {rows: testMovie[]}) => {
                 </Table>
             </TableContainer>
     )
+}
+
+
+const movieList = () => {
+
+    const state = useMLSelector(state => state)
+    const [page, setPage] = useState(1)
+    const movieListSliced = state.movieList?.slice(0, page * 10)
+
+    const incrementPage = () => {
+        setPage(page + 1)
+    };  
+
+    
+    return (
+        <InfiniteScroll
+            dataLength={movieListSliced!.length}
+            next={incrementPage}
+            hasMore={movieListSliced!.length < state.movieList!.length}
+            loader={""}
+        >
+            {
+                movieListSliced != undefined
+                && <DefaultMovieList rows={movieListSliced}/>
+            }
+
+        </InfiniteScroll>
+        
+    )
+        
 }
 
 export default movieList;

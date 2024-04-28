@@ -1,0 +1,7 @@
+.openapi-generator-ignore
+apis/MovieListControllerApi.ts
+apis/index.ts
+index.ts
+models/MovieDTO.ts
+models/index.ts
+runtime.ts

@@ -4,26 +4,14 @@ import Typography from "@mui/material/Typography";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import React from "react";
 import { Modal } from 'react-bootstrap'
+import { MovieDTO } from "../movielistapi";
 
-interface testMovie {
-    id : number,
-    title : string,
-    releaseYear: number,
-    description: string,
-    director: string,
-    actors: string[],
-    runtime: number,
-    rating: number,
-    votes: number,
-    revenue: number,
-    metascore: number
-}
 
-const GenerateMovieDetail = ({movie} : {movie : testMovie}) => {
+const GenerateMovieDetail = ({movie} : {movie : MovieDTO}) => {
     return (
         <Grid2>
 
-            <Typography>{movie.title}</Typography>
+            <Typography>{movie.movieTitle}</Typography>
             <Divider/>
 
             <Typography>Year</Typography>
@@ -36,7 +24,7 @@ const GenerateMovieDetail = ({movie} : {movie : testMovie}) => {
             <Typography>{movie.director}</Typography>
 
             <Typography>Actors</Typography>
-            <Typography>{movie.actors.join(" ")}</Typography>
+            <Typography>{movie.actors!.join(" ")}</Typography>
 
             <Typography>Runtime</Typography>
             <Typography>{movie.runtime} mins</Typography>
@@ -48,7 +36,7 @@ const GenerateMovieDetail = ({movie} : {movie : testMovie}) => {
             <Typography>{movie.votes}</Typography>
 
             <Typography>Revenue</Typography>
-            <Typography>${movie.revenue.toLocaleString()}</Typography> {/* toLocaleString will add the commas every thousand, so for example, 1000000 will become 1,000,000 */}
+            <Typography>${movie.revenue!.toLocaleString()}</Typography> {/* toLocaleString will add the commas every thousand, so for example, 1000000 will become 1,000,000 */}
 
             <Typography>Metascore</Typography>
             <Typography>{movie.metascore}</Typography>
@@ -58,7 +46,7 @@ const GenerateMovieDetail = ({movie} : {movie : testMovie}) => {
     )
 }
 
-const generateModal = ({movie} : {movie : testMovie}) => {
+const generateModal = ({movie} : {movie : MovieDTO}) => {
     <Modal>
         <GenerateMovieDetail movie={movie}/>
     </Modal>
