@@ -1,29 +1,29 @@
-package components.Controller;
+package com.movieList.Controller;
 
-import components.Service.Movie;
-import components.Service.MovieListService;
+import com.movieList.Service.MovieDTO;
+import com.movieList.Service.MovieListService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class MovieListController implements MovieListAPI {
 
     @Autowired
     MovieListService ms;
     @Override
-    public List<Movie> getAllMovies() {
+    public List<MovieDTO> getAllMovies() {
         return ms.getAllMovies();
     }
 
     @Override
-    public List<Movie> getTop10RevenueMovies() {
+    public List<MovieDTO> getTop10RevenueMovies() {
         return ms.getTopRevenueMovies();
     }
 
     @Override
-    public List<Movie> getTop10RevenueMoviesByYear(int year) {
+    public List<MovieDTO> getTop10RevenueMoviesByYear(int year) {
         return ms.getTopRevenueMoviesByYear(year);
     }
 

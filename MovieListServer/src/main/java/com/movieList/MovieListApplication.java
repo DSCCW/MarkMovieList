@@ -1,13 +1,13 @@
-package components;
+package com.movieList;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ComponentsApplication {
+public class MovieListApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ComponentsApplication.class, args);
+		SpringApplication.run(MovieListApplication.class, args);
 	}
 
 }

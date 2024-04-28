@@ -1,6 +1,6 @@
-package components.Controller;
+package com.movieList.Controller;
 
-import components.Service.Movie;
+import com.movieList.Service.MovieDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,12 +11,12 @@ import java.util.List;
 public interface MovieListAPI {
 
     @GetMapping("/")
-    List<Movie> getAllMovies();
+    List<MovieDTO> getAllMovies();
 
     @GetMapping("/revenue")
-    List<Movie> getTop10RevenueMovies();
+    List<MovieDTO> getTop10RevenueMovies();
 
     @GetMapping("/revenue/{year}")
-    List<Movie> getTop10RevenueMoviesByYear(@PathVariable int year);
+    List<MovieDTO> getTop10RevenueMoviesByYear(@PathVariable int year);
 
 }
