@@ -1,55 +1,52 @@
-
-import Divider from "@mui/material/Divider";
+import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import React from "react";
-import { Modal } from 'react-bootstrap'
 import { MovieDTO } from "../movielistapi";
 
 
+
 const GenerateMovieDetail = ({movie} : {movie : MovieDTO}) => {
+    console.log("In GenerateModal")
     return (
-        <Grid2>
+        <Box>
 
-            <Typography>{movie.movieTitle}</Typography>
-            <Divider/>
+            <Typography style={{opacity:"0.5"}}>Year</Typography>
+            <Typography style={{marginBottom:"10px", opacity:"0.5"}}><b>{movie.releaseYear}</b></Typography>
 
-            <Typography>Year</Typography>
-            <Typography>{movie.releaseYear}</Typography>
+            <Typography style={{opacity:"0.5"}}>Description</Typography>
+            <Typography style={{marginBottom:"10px"}}>{movie.description}</Typography>
 
-            <Typography>Description</Typography>
-            <Typography>{movie.description}</Typography>
+            <Typography style={{opacity:"0.5"}}>Director</Typography>
+            <Typography style={{marginBottom:"10px"}}>{movie.director}</Typography>
 
-            <Typography>Director</Typography>
-            <Typography>{movie.director}</Typography>
+            <Typography style={{opacity:"0.5"}}>Actors</Typography>
+            <Typography style={{marginBottom:"10px", color:"blue"}}>{movie.actors!.join(" ")}</Typography>
 
-            <Typography>Actors</Typography>
-            <Typography>{movie.actors!.join(" ")}</Typography>
+            <Typography style={{opacity:"0.5"}}>Runtime</Typography>
+            <Typography style={{marginBottom:"10px"}}>{movie.runtime} mins</Typography>
 
-            <Typography>Runtime</Typography>
-            <Typography>{movie.runtime} mins</Typography>
+            <Typography style={{opacity:"0.5"}}>Rating</Typography>
+            <Typography style={{marginBottom:"10px"}}>{movie.rating}</Typography>
 
-            <Typography>Rating</Typography>
-            <Typography>{movie.rating}</Typography>
+            <Typography style={{opacity:"0.5"}}>Votes</Typography>
+            <Typography style={{marginBottom:"10px"}}>{movie.votes}</Typography>
 
-            <Typography>Votes</Typography>
-            <Typography>{movie.votes}</Typography>
+            <Typography style={{opacity:"0.5"}}>Revenue</Typography>
+            <Typography style={{marginBottom:"10px"}}>${movie.revenue!.toLocaleString()}</Typography> {/* toLocaleString will add the commas every thousand, so for example, 1000000 will become 1,000,000 */}
 
-            <Typography>Revenue</Typography>
-            <Typography>${movie.revenue!.toLocaleString()}</Typography> {/* toLocaleString will add the commas every thousand, so for example, 1000000 will become 1,000,000 */}
-
-            <Typography>Metascore</Typography>
-            <Typography>{movie.metascore}</Typography>
+            <Typography style={{opacity:"0.5"}}>Metascore</Typography>
+            <Typography style={{marginBottom:"10px"}}>{movie.metascore}</Typography>
             
             
-        </Grid2>
+        </Box>
     )
 }
 
-const generateModal = ({movie} : {movie : MovieDTO}) => {
-    <Modal>
+const GenerateModal = ({movie} : {movie : MovieDTO}) => {
+    return(
         <GenerateMovieDetail movie={movie}/>
-    </Modal>
+    )
+    
 }
 
-export default generateModal;
+export default GenerateModal;

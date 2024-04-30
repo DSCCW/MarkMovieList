@@ -3,10 +3,12 @@ package com.movieList.Controller;
 import com.movieList.Service.MovieDTO;
 import com.movieList.Service.MovieListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000") //Para ignorar CORS
 @RestController
 public class MovieListController implements MovieListAPI {
 

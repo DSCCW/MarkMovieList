@@ -32,18 +32,27 @@ export const slice = createSlice({
     }
 })
 
-export const api = new MovieListControllerApi(new Configuration)
+export const api = new MovieListControllerApi(new Configuration(
+    {
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
+        
+    }
+))
 
 export const getMovies = () => (dispatch:any) => {
-    api.getAllMovies().then(data => dispatch(setMovieList(data)))
+    api.getAllMovies().then(data => {
+        dispatch(setMovieList(data))
+    })
 }
 
 export const getTop10MoviesByRevenue = () => (dispatch:any) => {
-    api.getTop10RevenueMovies().then(data => setFilteredMovieList(data))
+    api.getTop10RevenueMovies().then(data => dispatch(setFilteredMovieList(data)))
 }
 
 export const getTop10MoviesByRevenueByYear = (year: number) => (dispatch:any) => {
-    api.getTop10RevenueMoviesByYear({year: year}).then(data => setFilteredMovieList(data))
+    api.getTop10RevenueMoviesByYear({year: year}).then(data => dispatch(setFilteredMovieList(data)))
 }
 
 export const {setMovieList, setFilteredMovieList , setSelected} = slice.actions

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Table } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Card, Paper, Table, Typography } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -8,72 +8,122 @@ import TableBody from "@mui/material/TableBody";
 import IconButton from "@mui/material/IconButton";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { MovieDTO } from "../movielistapi";
-import { useMLSelector } from "../store/hooks";
+import { useAppDispatch, useMLSelector } from "../store/hooks";
+import { getMovies, setSelected } from "../store/MovieList";
+import GenerateModal from "./movieDetail";
+import { Visibility } from "@mui/icons-material";
+import { Modal } from "react-bootstrap";
 
 
+const MovieList = () => {
 
-
-const DefaultMovieList = ({rows} : {rows: MovieDTO[]}) => {
-    return (
-            <TableContainer>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Ranking</TableCell>
-                            <TableCell align="right">Title</TableCell>
-                            <TableCell align="right">Year</TableCell>
-                            <TableCell align="right">Revenue</TableCell>
-                            <TableCell align="right"></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {
-                            rows.map((row, index) => (
-                                <TableRow>
-                                    <TableCell>{index}</TableCell>
-                                    <TableCell align="right">{row.movieTitle}</TableCell>
-                                    <TableCell align="right">{row.releaseYear}</TableCell>
-                                    <TableCell align="right">{row.revenue}</TableCell>
-                                    <TableCell align="right">
-                                        <IconButton onClick={() => {/* TODO */}}></IconButton>
-                                    </TableCell>
-                                </TableRow>
-                            ))
-                        }
-                    </TableBody>
-                </Table>
-            </TableContainer>
-    )
-}
-
-
-const movieList = () => {
-
+    const dispatch = useAppDispatch()
     const state = useMLSelector(state => state)
-    const [page, setPage] = useState(1)
-    const movieListSliced = state.movieList?.slice(0, page * 10)
+
+    useEffect(() => {
+            dispatch(getMovies())
+    }, [])
+
+    const [size, setSize] = useState(10)
+    const movieListSliced = state.movieList?.slice(0, size)
+    const [showModal, setShowModal] = useState(true)
 
     const incrementPage = () => {
-        setPage(page + 1)
-    };  
+        setTimeout(() => {
+            setSize(size + 5)
+        }, 250)
+    };
+
+    const GenerateModalDetails = ({movie} : {movie : MovieDTO}) => {
+        return (
+            <Modal
+                show={showModal}
+                onHide={() => {
+                    dispatch(setSelected(undefined))
+                    setShowModal(false)
+                }}
+                fullscreen="md"
+                size="lg"
+            >
+
+                <Modal.Header closeButton style={{marginLeft:"20px", marginRight:"20px"}}>
+                    <Modal.Title>
+                        <Typography variant="h5" style={{color:"darkslategray", fontSize:"32px"}}>{movie.movieTitle}</Typography>
+                    </Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body style={{marginLeft:"20px", marginRight:"20px"}}>
+                    <GenerateModal movie={movie}/>
+                </Modal.Body>
+                
+
+            </Modal>
+        )
+    }
+
+    const DefaultMovieList = ({rows} : {rows: MovieDTO[]}) => {
+        
+        return (
+            <div>
+                <TableContainer style={{}} component={Paper}>
+                    <Table stickyHeader>
+                        <TableHead>
+                            Movie Ranking
+                            <TableRow>
+                                <TableCell>Ranking</TableCell>
+                                <TableCell>Title</TableCell>
+                                <TableCell>Year</TableCell>
+                                <TableCell>Revenue</TableCell>
+                                <TableCell></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {
+                                rows.map((row, index) => (
+                                    <TableRow>
+                                        <TableCell>{index}</TableCell>
+                                        <TableCell>{row.movieTitle}</TableCell>
+                                        <TableCell>{row.releaseYear}</TableCell>
+                                        <TableCell>${row.revenue?.toLocaleString()}</TableCell>
+                                        <TableCell>
+                                            <IconButton>
+                                                <Visibility onClick={() => {
+                                                    dispatch(setSelected(row))
+                                                    setShowModal(true)
+                                                    }}/>
+                                               
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        )
+    }
 
     
-    return (
-        <InfiniteScroll
-            dataLength={movieListSliced!.length}
-            next={incrementPage}
-            hasMore={movieListSliced!.length < state.movieList!.length}
-            loader={""}
-        >
-            {
-                movieListSliced != undefined
-                && <DefaultMovieList rows={movieListSliced}/>
-            }
-
-        </InfiniteScroll>
-        
-    )
+    return <>
+        {
+            movieListSliced != undefined
+            && <InfiniteScroll
+                    dataLength={movieListSliced!.length}
+                    next={incrementPage}
+                    hasMore={movieListSliced!.length < state.movieList!.length}
+                    loader={""}
+                    height={'85vh'}
+                    style={{}}
+                >
+                    <DefaultMovieList rows={movieListSliced}/>
+                </InfiniteScroll>
+            
+        }
+        {state.selected != undefined 
+            && <GenerateModalDetails movie={state.selected}/>}
+    </>
         
 }
 
-export default movieList;
+export default MovieList;
