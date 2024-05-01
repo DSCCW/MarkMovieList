@@ -5,12 +5,14 @@ import { Configuration, MovieDTO, MovieListControllerApi } from '../movielistapi
 export interface State {
     movieList: MovieDTO[] | undefined,
     filteredMovieList: MovieDTO[] | undefined,
+    filteredByYearMovieList: MovieDTO[] | undefined,
     selected: MovieDTO | undefined,
 }
 
 const initialState : State = {
     movieList: undefined,
     filteredMovieList: undefined,
+    filteredByYearMovieList: undefined,
     selected: undefined
 }
 
@@ -24,6 +26,10 @@ export const slice = createSlice({
 
         setFilteredMovieList: (state, action:PayloadAction<MovieDTO[] | undefined>) => {
             state.filteredMovieList = action.payload
+        },
+
+        setFilteredByYearMovieList: (state, action:PayloadAction<MovieDTO[] | undefined>) => {
+            state.filteredByYearMovieList = action.payload
         },
 
         setSelected: (state, action:PayloadAction<MovieDTO | undefined>) => {
@@ -52,9 +58,9 @@ export const getTop10MoviesByRevenue = () => (dispatch:any) => {
 }
 
 export const getTop10MoviesByRevenueByYear = (year: number) => (dispatch:any) => {
-    api.getTop10RevenueMoviesByYear({year: year}).then(data => dispatch(setFilteredMovieList(data)))
+    api.getTop10RevenueMoviesByYear({year: year}).then(data => dispatch(setFilteredByYearMovieList(data)))
 }
 
-export const {setMovieList, setFilteredMovieList , setSelected} = slice.actions
+export const {setMovieList, setFilteredMovieList, setFilteredByYearMovieList, setSelected} = slice.actions
 
 export default slice.reducer
