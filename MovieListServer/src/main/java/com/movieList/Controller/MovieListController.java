@@ -26,7 +26,6 @@ public class MovieListController implements MovieListAPI {
 
     @Override
     public List<MovieDTO> getTop10RevenueMoviesByYear(int year) {
-        System.out.println(year);
         return ms.getTopRevenueMoviesByYear(year);
     }
 

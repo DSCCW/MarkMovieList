@@ -9,6 +9,7 @@ import MovieList from './components/movieList';
 import DatePicker from 'react-datepicker'
 import { getTop10MoviesByRevenueByYear } from './store/MovieList';
 import 'react-datepicker/dist/react-datepicker.css'
+import GenerateModal from './components/movieDetail';
 
 
 
@@ -23,20 +24,22 @@ function App() {
   useEffect(() =>
     {
       dispatch(getTop10MoviesByRevenueByYear(date!.getFullYear()))
-      console.log("in")
     }, [date] 
   )
  
 
   const GenerateDatePicker = () => {
       return (
-        <DatePicker
-          selected={date}
-          onChange={(date) => setDate(date)}
-          dateFormat="yyyy"
-          dateFormatCalendar="yyyy"
-          showYearPicker
-        />
+        <div style={{marginTop:"0.5rem"}}>
+          <DatePicker
+            selected={date}
+            onChange={(date) => setDate(date)}
+            dateFormat="yyyy"
+            dateFormatCalendar="yyyy"
+            showYearPicker
+          />
+        </div>
+        
       )
     }
 
@@ -51,6 +54,7 @@ function App() {
             spacing={"6"}
           >
             <Grid item>
+
               <Button 
                 color="secondary" variant={toggleFilteredList ? "contained" : "outlined"} 
                 size='small' 
@@ -60,24 +64,25 @@ function App() {
                 }}
                 sx={{textTransform: 'capitalize'}}
               >Top 10 Revenue</Button>
+
             </Grid>
 
             <Grid item style={{zIndex:'1000'}}>
 
-            <Button 
-                color="secondary" variant={toggleFilteredYearList ? "contained" : "outlined"} 
-                size='small' 
-                onClick={() => {
-                    setToggleFilteredList(false) 
-                    setToggleFilteredYearList(!toggleFilteredYearList)    
-                }}
-                sx={{textTransform: 'capitalize'}}
-              >Top 10 Revenue per Year</Button>
+              <Button 
+                  color="secondary" variant={toggleFilteredYearList ? "contained" : "outlined"} 
+                  size='small' 
+                  onClick={() => {
+                      setToggleFilteredList(false) 
+                      setToggleFilteredYearList(!toggleFilteredYearList)    
+                  }}
+                  sx={{textTransform: 'capitalize'}}
+                >Top 10 Revenue per Year</Button>
 
-              {
-                toggleFilteredYearList
-                && <GenerateDatePicker/>
-              }
+                {
+                  toggleFilteredYearList
+                  && <GenerateDatePicker/>
+                }
                 
             </Grid>
           </Grid>
@@ -108,9 +113,14 @@ function App() {
 
         (
           <div className="MovieList">
-            <MovieList showModal={showModal} setShowModal={setShowModal}/>
+            <MovieList setShowModal={setShowModal}/>
           </div>
         )
+      }
+
+      {
+        state.selected !== undefined 
+        && <GenerateModal movie={state.selected} showModal={showModal} setShowModal={setShowModal}/>
       }
       
     </div>

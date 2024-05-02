@@ -8,12 +8,13 @@ public class Movie {
 
     @Id
     long id;
+    long revenue; // revenue de um filme pode ser maior do que uma variavel int consegue segura, causando overflow
     String movieTitle, description, director;
     String[] actors;
-    int releaseYear, runtime, votes, revenue, metascore;
+    int releaseYear, runtime, votes, metascore;
     double rating;
 
-    public Movie(long id, String movieTitle, int releaseYear, String description, String director, String[] actors, int runtime, double rating, int votes, int revenue, int metascore) {
+    public Movie(long id, String movieTitle, int releaseYear, String description, String director, String[] actors, int runtime, double rating, int votes, long revenue, int metascore) {
         this.id = id;
         this.movieTitle = movieTitle;
         this.description = description;
@@ -95,11 +96,11 @@ public class Movie {
         this.votes = votes;
     }
 
-    public int getRevenue() {
+    public long getRevenue() {
         return revenue;
     }
 
-    public void setRevenue(int revenue) {
+    public void setRevenue(long revenue) {
         this.revenue = revenue;
     }
 

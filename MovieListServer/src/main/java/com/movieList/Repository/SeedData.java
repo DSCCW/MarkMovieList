@@ -106,5 +106,53 @@ public class SeedData implements CommandLineRunner {
 
         movies.save(new Movie(random.nextLong(), "Guardians of the Galaxy", 2014, "A group of intergalactic criminals must pull together to stop a fanatical warrior with plans to purge the universe.",
                 "James Gunn", new String[]{"Chris Pratt", "Zoe Saldana", "Dave Bautista"}, 121, 8.0, 8400, 773328629, 76));
+
+        movies.save(new Movie(random.nextLong(), "Star Wars: Episode VIII - The Last Jedi", 2017, "Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her powers. Meanwhile, the Resistance prepares for battle with the First Order.",
+                "Rian Johnson", new String[]{"Daisy Ridley", "John Boyega", "Mark Hamill"}, 152, 7.0, 9300, 1332539889, 85));
+
+        movies.save(new Movie(random.nextLong(), "Wonder Woman", 2017, "When a pilot crashes and tells of conflict in the outside world, Diana, an Amazonian warrior in training, leaves home to fight a war, discovering her full powers and true destiny.",
+                "Patty Jenkins", new String[]{"Gal Gadot", "Chris Pine", "Robin Wright"}, 141, 7.4, 8700, 821847012, 76));
+
+        movies.save(new Movie(random.nextLong(), "Blade Runner 2049", 2017, "A young blade runner's discovery of a long-buried secret leads him to track down former blade runner Rick Deckard, who's been missing for thirty years.",
+                "Denis Villeneuve", new String[]{"Harrison Ford", "Ryan Gosling", "Ana de Armas"}, 164, 8.0, 9200, 260502446, 81));
+
+        movies.save(new Movie(random.nextLong(), "Get Out", 2017, "A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.",
+                "Jordan Peele", new String[]{"Daniel Kaluuya", "Allison Williams", "Bradley Whitford"}, 104, 7.7, 8900, 255407969, 84));
+
+        movies.save(new Movie(random.nextLong(), "Logan", 2017, "In a future where mutants are nearly extinct, an elderly and weary Logan leads a quiet life. But when Laura, a mutant child pursued by scientists, comes to him for help, he must get her to safety.",
+                "James Mangold", new String[]{"Hugh Jackman", "Patrick Stewart", "Dafne Keen"}, 137, 8.1, 9500, 619021436, 77));
+
+        movies.save(new Movie(random.nextLong(), "Dunkirk", 2017, "Allied soldiers from Belgium, the British Empire, and France are surrounded by the German Army and evacuated during a fierce battle in World War II.",
+                "Christopher Nolan", new String[]{"Fionn Whitehead", "Barry Keoghan", "Mark Rylance"}, 106, 7.8, 9300, 526940665, 94));
+
+        movies.save(new Movie(random.nextLong(), "The Shape of Water", 2017, "At a top-secret research facility in the 1960s, a lonely janitor forms a unique relationship with an amphibious creature that is being held in captivity.",
+                "Guillermo del Toro", new String[]{"Sally Hawkins", "Octavia Spencer", "Michael Shannon"}, 123, 7.3, 9100, 195243464, 87));
+
+        movies.save(new Movie(random.nextLong(), "Coco", 2017, "Aspiring musician Miguel, confronted with his family's ancestral ban on music, enters the Land of the Dead to find his great-great-grandfather, a legendary singer.",
+                "Lee Unkrich, Adrian Molina", new String[]{"Anthony Gonzalez", "Gael García Bernal", "Benjamin Bratt"}, 105, 8.4, 8800, 807082196, 81));
+
+        movies.save(new Movie(random.nextLong(), "Baby Driver", 2017, "After being coerced into working for a crime boss, a young getaway driver finds himself taking part in a heist doomed to fail.",
+                "Edgar Wright", new String[]{"Ansel Elgort", "Jon Hamm", "Jamie Foxx"}, 113, 7.6, 8500, 226945087, 86));
+
+        movies.save(new Movie(random.nextLong(), "Three Billboards Outside Ebbing, Missouri", 2017, "A mother personally challenges the local authorities to solve her daughter's murder when they fail to catch the culprit.",
+                "Martin McDonagh", new String[]{"Frances McDormand", "Woody Harrelson", "Sam Rockwell"}, 115, 8.2, 9000, 160192237, 88));
+
+        movies.save(new Movie(random.nextLong(), "Dune", 2021, "Feature adaptation of Frank Herbert's science fiction novel, about the son of a noble family entrusted with the protection of the most valuable asset and most vital element in the galaxy.",
+                "Denis Villeneuve", new String[]{"Timothée Chalamet", "Rebecca Ferguson", "Zendaya"}, 155, 7.9, 8700, 40450000, 74));
+
+        movies.save(new Movie(random.nextLong(), "No Time to Die", 2021, "James Bond has left active service. His peace is short-lived when Felix Leiter, an old friend from the CIA, turns up asking for help, leading Bond onto the trail of a mysterious villain armed with dangerous new technology.",
+                "Cary Joji Fukunaga", new String[]{"Daniel Craig", "Ana de Armas", "Rami Malek"}, 163, 7.5, 9300, 77407476, 68));
+
+        movies.save(new Movie(random.nextLong(), "Joker", 2019, "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker.",
+                "Todd Phillips", new String[]{"Joaquin Phoenix", "Robert De Niro", "Zazie Beetz"}, 122, 8.4, 9300, 1074251311, 59));
+
+        movies.save(new Movie(random.nextLong(), "Avengers: Endgame", 2019, "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+                "Anthony Russo, Joe Russo", new String[]{"Robert Downey Jr.", "Chris Evans", "Mark Ruffalo"}, 181, 8.4, 9500, 2797501328L, 78));
+
+        movies.save(new Movie(random.nextLong(), "Independence Day", 1996, "The aliens are coming and their goal is to invade and destroy Earth. Fighting superior technology, mankind's best weapon is the will to survive.",
+                "Roland Emmerich", new String[]{"Will Smith", "Bill Pullman", "Jeff Goldblum"}, 145, 7.0, 8400, 817400891, 59));
+
+        movies.save(new Movie(random.nextLong(), "Mission: Impossible", 1996, "An American agent, under false suspicion of disloyalty, must discover and expose the real spy without the help of his organization.",
+                "Brian De Palma", new String[]{"Tom Cruise", "Jon Voight", "Emmanuelle Béart"}, 110, 7.1, 8100, 457696359, 60));
     }
 }

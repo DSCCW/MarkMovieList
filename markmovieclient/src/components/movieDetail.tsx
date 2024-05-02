@@ -2,11 +2,13 @@ import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import { MovieDTO } from "../movielistapi";
+import { useAppDispatch } from "../store/hooks";
+import { setSelected } from "../store/MovieList";
+import { Modal } from "react-bootstrap"
 
 
 
 const GenerateMovieDetail = ({movie} : {movie : MovieDTO}) => {
-    console.log("In GenerateModal")
     return (
         <Box>
 
@@ -42,11 +44,35 @@ const GenerateMovieDetail = ({movie} : {movie : MovieDTO}) => {
     )
 }
 
-const GenerateModal = ({movie} : {movie : MovieDTO}) => {
-    return(
-        <GenerateMovieDetail movie={movie}/>
-    )
+
+const GenerateModal = ({movie, showModal, setShowModal} : {movie: MovieDTO, showModal: boolean, setShowModal: React.Dispatch<React.SetStateAction<boolean>>}) => {
+    const dispatch = useAppDispatch()
+    return (
     
+            <Modal
+                show={showModal}
+                onHide={() => {
+                    dispatch(setSelected(undefined))
+                    setShowModal(false)
+                }}
+                fullscreen="md"
+                size="lg"
+            >
+                
+                <Modal.Header closeButton style={{marginLeft:"20px", marginRight:"20px"}}>
+                    <Modal.Title>
+                        <Typography variant="h5" style={{color:"darkslategray", fontSize:"32px"}}>{movie.movieTitle}</Typography>
+                    </Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body style={{marginLeft:"20px", marginRight:"20px"}}>
+                    <GenerateMovieDetail movie={movie}/>
+                </Modal.Body>
+
+            </Modal>
+
+        )
+
 }
 
 export default GenerateModal;
